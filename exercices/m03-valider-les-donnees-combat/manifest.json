@@ -1,0 +1,7 @@
+{
+  "titre": "La validation sur un DTO",
+  "type": "java",
+  "branche": "exercice/validation",
+  "classes": ["com.nocturne.lanterne.manoir.ValidationCommandeManoirTest"],
+  "minimumTests": 8
+}

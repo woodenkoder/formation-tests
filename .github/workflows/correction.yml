@@ -1,0 +1,104 @@
+# Le workflow de correction du manoir (PROD READY · La Maison hantée de la prod).
+#
+# Appelé par la Lanterne de l'élève (son workflow « Manoir »), toujours à une version épinglée :
+#   uses: woodenkoder/formation-tests/.github/workflows/correction.yml@v1
+#
+# 1. « tests » : trouve l'épreuve, lance NOS tests cachés dans la Lanterne de l'élève. Ce job exécute le code de
+#    l'élève : il n'a AUCUN droit de demander un jeton (pas de « id-token: write »).
+# 2. « envoi » : n'exécute aucun code de l'élève. Il demande à GitHub un jeton OIDC (qui prouve que c'est CE
+#    workflow, à CETTE version, sur une machine GitHub) et envoie le résultat au manoir (fonction github-result).
+name: Correction du manoir
+
+on:
+  workflow_call:
+    inputs:
+      branche:
+        description: La branche poussée (exercice/…) ou l'identifiant de l'épreuve.
+        type: string
+        required: true
+    secrets:
+      code:
+        description: Le code de liaison donné par « Mon compte » (secret MANOIR_CODE), seulement la première fois.
+        required: false
+
+permissions: {}
+
+jobs:
+  tests:
+    name: Tests du manoir
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      exercice: ${{ steps.exercice.outputs.id }}
+    steps:
+      - name: Les tests du manoir (version v1)
+        uses: actions/checkout@v4
+        with:
+          repository: woodenkoder/formation-tests
+          ref: v1
+          path: manoir
+          persist-credentials: false
+
+      - name: Quelle épreuve ?
+        id: exercice
+        env:
+          BRANCHE: ${{ inputs.branche }}
+        run: node manoir/scripts/exercice.mjs "$BRANCHE" >> "$GITHUB_OUTPUT"
+
+      - name: Ta Lanterne
+        uses: actions/checkout@v4
+        with:
+          path: eleve
+          persist-credentials: false
+
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Tests cachés
+        env:
+          EXERCICE: ${{ steps.exercice.outputs.id }}
+        run: |
+          type=$(jq -r '.type' "manoir/exercices/$EXERCICE/manifest.json")
+          case "$type" in
+            java) bash manoir/scripts/java.sh "$EXERCICE" ;;
+            *) echo "::error::Type d'épreuve pas encore corrigé : $type"; exit 1 ;;
+          esac
+
+  envoi:
+    name: Résultat envoyé au manoir
+    needs: tests
+    if: always() && needs.tests.outputs.exercice != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      id-token: write
+    steps:
+      - name: Envoyer le résultat
+        env:
+          EXERCICE: ${{ needs.tests.outputs.exercice }}
+          REUSSI: ${{ needs.tests.result == 'success' }}
+          CODE: ${{ secrets.code }}
+          MANOIR: https://dlpagomkagiotcdwgpgz.supabase.co/functions/v1/github-result
+        run: |
+          jeton=$(curl -sS --fail -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=woodenkoder-formation" | jq -r '.value')
+          corps=$(jq -n --arg id "$EXERCICE" --argjson ok "$REUSSI" --arg code "$CODE" \
+            '{results: [{exerciseId: $id, passed: $ok}]} + (if $code == "" then {} else {linkCode: $code} end)')
+          reponse=$(mktemp)
+          statut=$(curl -sS -o "$reponse" -w '%{http_code}' -X POST "$MANOIR" \
+            -H "Authorization: Bearer $jeton" -H 'Content-Type: application/json' --data "$corps")
+          erreur=$(jq -r '.error // empty' "$reponse" 2>/dev/null || true)
+          case "$statut:$erreur" in
+            200:*) echo "Résultat enregistré dans le manoir ($EXERCICE : $([ "$REUSSI" = true ] && echo réussi || echo pas encore))." ;;
+            403:not-linked) echo "::error::Ta Lanterne n'est pas encore reliée à ton compte. Dans le manoir : Mon compte → Ton dépôt GitHub → Obtenir un code de liaison, puis mets-le dans le secret MANOIR_CODE de ce dépôt."; exit 1 ;;
+            403:link-code) echo "::error::Code de liaison inconnu ou expiré (1 heure, une seule fois). Crée-en un nouveau dans Mon compte, puis mets-le dans le secret MANOIR_CODE."; exit 1 ;;
+            403:access) echo "::error::Ce compte n'a pas accès à la formation."; exit 1 ;;
+            409:*) echo "::error::Ce dépôt est déjà relié à un autre compte."; exit 1 ;;
+            429:*) echo "::error::Trop de corrections en une heure. Réessaie un peu plus tard."; exit 1 ;;
+            *) echo "::error::Le manoir n'a pas pu enregistrer le résultat (HTTP $statut ${erreur:-})."; exit 1 ;;
+          esac

@@ -14,7 +14,8 @@ minimum=$(jq -r '.minimumTests' "$manifest")
 
 cd eleve
 [ -f pom.xml ] || { echo "::error::Pas de pom.xml à la racine de ta Lanterne."; exit 1; }
-# Nos tests remplacent tout fichier du même nom.
+# Nos tests remplacent tout fichier du même nom (le dossier des tests peut ne pas exister : Git ignore les dossiers vides).
+mkdir -p src/test/java
 cp -R "$exercice/tests/." src/test/java/
 rm -rf target/surefire-reports
 

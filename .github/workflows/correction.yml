@@ -68,6 +68,7 @@ jobs:
           type=$(jq -r '.type' "manoir/exercices/$EXERCICE/manifest.json")
           case "$type" in
             java) bash manoir/scripts/java.sh "$EXERCICE" ;;
+            docker | ci) bash manoir/scripts/script.sh "$EXERCICE" ;;
             *) echo "::error::Type d'épreuve pas encore corrigé : $type"; exit 1 ;;
           esac
 

@@ -1,0 +1,5 @@
+{
+  "titre": "Un déploiement automatique sur tag",
+  "type": "ci",
+  "branche": "exercice/deploiement"
+}

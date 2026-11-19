@@ -1,0 +1,5 @@
+{
+  "titre": "Ajouter l'analyse et bloquer la PR si elle échoue",
+  "type": "ci",
+  "branche": "exercice/qualite"
+}

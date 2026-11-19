@@ -22,6 +22,10 @@ Lire nos tests est permis : c'est une formation. Les contourner ne trompe que to
 exercices/<identifiant de l'épreuve>/
   manifest.json   { "titre", "type": "java", "branche": "exercice/…", "classes": [...], "minimumTests": n }
   tests/…         les classes de test, dans leurs packages
+
+exercices/<identifiant de l'épreuve>/          (types docker et ci)
+  manifest.json   { "titre", "type": "docker" | "ci", "branche": "exercice/…" }
+  verifier.sh     les vérifications (verifie, ok, ko… : scripts/outils.sh), lancées dans la Lanterne
 ```
 
 Les Lanternes appellent le workflow sur `main` : une épreuve poussée sur `main` est corrigée tout de suite, sans

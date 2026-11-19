@@ -1,0 +1,5 @@
+{
+  "titre": "Un Dockerfile multi-étapes",
+  "type": "docker",
+  "branche": "exercice/docker"
+}

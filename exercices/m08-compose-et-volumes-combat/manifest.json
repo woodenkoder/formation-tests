@@ -1,0 +1,5 @@
+{
+  "titre": "Compose avec l'app, PostgreSQL et un volume",
+  "type": "docker",
+  "branche": "exercice/compose"
+}

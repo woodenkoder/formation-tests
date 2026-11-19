@@ -1,0 +1,5 @@
+{
+  "titre": "Un workflow qui build et teste à chaque push",
+  "type": "ci",
+  "branche": "exercice/ci"
+}

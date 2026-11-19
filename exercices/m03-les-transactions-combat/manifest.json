@@ -1,0 +1,10 @@
+{
+  "titre": "Corriger un virement enregistré à moitié",
+  "type": "java",
+  "branche": "exercice/virement",
+  "classes": [
+    "com.nocturne.lanterne.manoir.VirementManoirTest",
+    "com.nocturne.lanterne.virement.VirementIntegrationTest"
+  ],
+  "minimumTests": 6
+}

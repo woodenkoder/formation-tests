@@ -1,0 +1,10 @@
+{
+  "titre": "Sortir la logique du controller",
+  "type": "java",
+  "branche": "exercice/golem",
+  "classes": [
+    "com.nocturne.lanterne.manoir.GolemManoirTest",
+    "com.nocturne.lanterne.commande.CommandeServiceTest"
+  ],
+  "minimumTests": 10
+}

@@ -1,7 +1,7 @@
 # Les tests du manoir
 
 Le workflow de correction des combats GitHub de **PROD READY · La Maison hantée de la prod**, et nos tests
-cachés, à une version épinglée (`v1`).
+cachés.
 
 Tu n'as rien à faire ici : ta Lanterne ([formation-projet](https://github.com/woodenkoder/formation-projet))
 appelle ce workflow à chaque push sur une branche `exercice/…`.
@@ -24,5 +24,6 @@ exercices/<identifiant de l'épreuve>/
   tests/…         les classes de test, dans leurs packages
 ```
 
-Une nouvelle version = un nouveau tag (`v2`), ajouté à la liste des versions acceptées par la fonction
-`github-result` du manoir.
+Les Lanternes appellent le workflow sur `main` : une épreuve poussée sur `main` est corrigée tout de suite, sans
+toucher aux dépôts des élèves. Le manoir n'accepte que ce workflow, sur `main` (ou au tag `v1`, la première
+version), de ce dépôt.

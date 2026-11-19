@@ -1,0 +1,11 @@
+{
+  "titre": "Passer à l'injection par constructeur",
+  "type": "java",
+  "branche": "exercice/injection",
+  "classes": [
+    "com.nocturne.lanterne.manoir.InjectionManoirTest",
+    "com.nocturne.lanterne.commande.CommandeServiceTest",
+    "com.nocturne.lanterne.commande.FideliteServiceTest"
+  ],
+  "minimumTests": 9
+}

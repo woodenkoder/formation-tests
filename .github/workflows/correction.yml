@@ -1,7 +1,9 @@
 # Le workflow de correction du manoir (PROD READY · La Maison hantée de la prod).
 #
-# Appelé par la Lanterne de l'élève (son workflow « Manoir »), toujours à une version épinglée :
-#   uses: woodenkoder/formation-tests/.github/workflows/correction.yml@v1
+# Appelé par la Lanterne de l'élève (son workflow « Manoir ») :
+#   uses: woodenkoder/formation-tests/.github/workflows/correction.yml@main
+# Seule la branche main de CE dépôt (ou le tag v1) est acceptée par le manoir : une copie du workflow ailleurs, ou
+# modifiée, a une autre identité dans le jeton de GitHub et elle est refusée.
 #
 # 1. « tests » : trouve l'épreuve, lance NOS tests cachés dans la Lanterne de l'élève. Ce job exécute le code de
 #    l'élève : il n'a AUCUN droit de demander un jeton (pas de « id-token: write »).
@@ -33,11 +35,11 @@ jobs:
     outputs:
       exercice: ${{ steps.exercice.outputs.id }}
     steps:
-      - name: Les tests du manoir (version v1)
+      - name: Les tests du manoir
         uses: actions/checkout@v4
         with:
           repository: woodenkoder/formation-tests
-          ref: v1
+          ref: main
           path: manoir
           persist-credentials: false
 

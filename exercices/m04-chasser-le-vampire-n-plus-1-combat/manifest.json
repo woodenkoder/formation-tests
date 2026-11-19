@@ -1,0 +1,10 @@
+{
+  "titre": "Corriger un N+1 avec un fetch join",
+  "type": "java",
+  "branche": "exercice/n-plus-1",
+  "classes": [
+    "com.nocturne.lanterne.manoir.NPlusUnManoirTest",
+    "com.nocturne.lanterne.admin.CommandesAdminRequetesTest"
+  ],
+  "minimumTests": 7
+}

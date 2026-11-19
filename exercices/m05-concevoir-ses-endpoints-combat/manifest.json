@@ -1,0 +1,10 @@
+{
+  "titre": "Un CRUD qui respecte les conventions",
+  "type": "java",
+  "branche": "exercice/crud",
+  "classes": [
+    "com.nocturne.lanterne.manoir.CrudManoirTest",
+    "com.nocturne.lanterne.produit.ProduitControllerTest"
+  ],
+  "minimumTests": 8
+}

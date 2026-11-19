@@ -1,0 +1,7 @@
+{
+  "titre": "La doc Swagger et une limite de débit",
+  "type": "java",
+  "branche": "exercice/doc-debit",
+  "classes": ["com.nocturne.lanterne.manoir.DocDebitManoirTest"],
+  "minimumTests": 5
+}

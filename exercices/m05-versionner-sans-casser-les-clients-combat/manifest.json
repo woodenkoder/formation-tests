@@ -1,0 +1,7 @@
+{
+  "titre": "Une v2 d'un endpoint en gardant la v1",
+  "type": "java",
+  "branche": "exercice/versions",
+  "classes": ["com.nocturne.lanterne.manoir.VersionsManoirTest"],
+  "minimumTests": 6
+}

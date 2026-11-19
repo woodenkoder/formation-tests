@@ -1,0 +1,9 @@
+{
+  "titre": "Isoler un module avec une frontière claire dans le monolithe",
+  "type": "java",
+  "branche": "exercice/modules",
+  "classes": [
+    "com.nocturne.lanterne.manoir.ModulesManoirTest"
+  ],
+  "minimumTests": 6
+}

@@ -1,0 +1,7 @@
+{
+  "titre": "Publier et consommer un événement « commande créée »",
+  "type": "java",
+  "branche": "exercice/messages",
+  "classes": ["com.nocturne.lanterne.manoir.MessagesManoirTest"],
+  "minimumTests": 5
+}

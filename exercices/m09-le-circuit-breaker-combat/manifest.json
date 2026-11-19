@@ -1,0 +1,7 @@
+{
+  "titre": "Circuit breaker et repli sur un appel externe",
+  "type": "java",
+  "branche": "exercice/circuit-breaker",
+  "classes": ["com.nocturne.lanterne.manoir.CircuitBreakerManoirTest"],
+  "minimumTests": 7
+}

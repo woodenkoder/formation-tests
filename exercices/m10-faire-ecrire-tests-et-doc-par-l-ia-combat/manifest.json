@@ -1,0 +1,10 @@
+{
+  "titre": "Compléter les tests manquants avec l'IA jusqu'au seuil",
+  "type": "java",
+  "branche": "exercice/tests-ia",
+  "classes": [
+    "com.nocturne.lanterne.manoir.TestsIaManoirTest",
+    "com.nocturne.lanterne.remise.RemiseServiceTest"
+  ],
+  "minimumTests": 6
+}

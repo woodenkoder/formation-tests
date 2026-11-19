@@ -1,4 +1,5 @@
 {
+  "numero": "05.1",
   "titre": "Un CRUD qui respecte les conventions",
   "type": "java",
   "branche": "exercice/crud",

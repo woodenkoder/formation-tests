@@ -1,4 +1,5 @@
 {
+  "numero": "04.3",
   "titre": "Corriger un N+1 avec un fetch join",
   "type": "java",
   "branche": "exercice/n-plus-1",

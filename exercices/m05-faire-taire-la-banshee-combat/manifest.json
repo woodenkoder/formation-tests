@@ -1,7 +1,10 @@
 {
+  "numero": "05.3",
   "titre": "Un @ControllerAdvice au format d'erreur standard",
   "type": "java",
   "branche": "exercice/erreurs",
-  "classes": ["com.nocturne.lanterne.manoir.BansheeManoirTest"],
+  "classes": [
+    "com.nocturne.lanterne.manoir.BansheeManoirTest"
+  ],
   "minimumTests": 6
 }

@@ -1,7 +1,10 @@
 {
+  "numero": "03.5",
   "titre": "Variables d'environnement, profils dev et prod",
   "type": "java",
   "branche": "exercice/configuration",
-  "classes": ["com.nocturne.lanterne.manoir.ConfigurationManoirTest"],
+  "classes": [
+    "com.nocturne.lanterne.manoir.ConfigurationManoirTest"
+  ],
   "minimumTests": 6
 }

@@ -1,4 +1,5 @@
 {
+  "numero": "10.4",
   "titre": "Compléter les tests manquants avec l'IA jusqu'au seuil",
   "type": "java",
   "branche": "exercice/tests-ia",

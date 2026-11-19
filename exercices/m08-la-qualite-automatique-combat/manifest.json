@@ -1,4 +1,5 @@
 {
+  "numero": "08.4",
   "titre": "Ajouter l'analyse et bloquer la PR si elle échoue",
   "type": "ci",
   "branche": "exercice/qualite"

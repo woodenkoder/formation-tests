@@ -4,9 +4,10 @@
 
 REUSSIES=0
 ECHECS=0
+LIGNES=$(mktemp)
 
-ok() { echo "✔ $1"; REUSSIES=$((REUSSIES + 1)); }
-ko() { echo "::error::✖ $1"; ECHECS=$((ECHECS + 1)); }
+ok() { echo "✔ $1"; REUSSIES=$((REUSSIES + 1)); printf 'ok\t%s\n' "$1" >>"$LIGNES"; }
+ko() { echo "::error::✖ $1"; ECHECS=$((ECHECS + 1)); printf 'ko\t%s\n' "$1" >>"$LIGNES"; }
 
 # verifie "ce qu'on vérifie" commande… : ✔ si la commande réussit, ✖ sinon.
 verifie() {
@@ -39,6 +40,8 @@ attendre_http() {
 }
 
 bilan() {
+  # shellcheck disable=SC2154 # id vient de script.sh
+  python3 "$MANOIR/scripts/bilan.py" "$MANOIR/exercices/$id/manifest.json" --lignes "$LIGNES" || true
   echo "$REUSSIES vérification(s) réussie(s), $ECHECS en échec."
   if [ "$ECHECS" -gt 0 ]; then
     echo "::error::Des vérifications du manoir échouent : lis les ✖ ci-dessus, corrige, puis pousse à nouveau."

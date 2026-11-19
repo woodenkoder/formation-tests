@@ -1,4 +1,5 @@
 {
+  "numero": "06.2",
   "titre": "Les tests unitaires d'un service avec un mock",
   "type": "java",
   "branche": "exercice/mockito",

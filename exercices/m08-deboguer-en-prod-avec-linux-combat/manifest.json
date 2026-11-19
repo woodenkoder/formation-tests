@@ -1,4 +1,5 @@
 {
+  "numero": "08.6",
   "titre": "Un script Bash de diagnostic lancé par ta CI",
   "type": "ci",
   "branche": "exercice/diagnostic"

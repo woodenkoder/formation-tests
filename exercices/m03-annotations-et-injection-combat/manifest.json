@@ -1,4 +1,5 @@
 {
+  "numero": "03.2",
   "titre": "Passer à l'injection par constructeur",
   "type": "java",
   "branche": "exercice/injection",

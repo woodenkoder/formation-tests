@@ -1,7 +1,10 @@
 {
+  "numero": "07.3",
   "titre": "Protéger les endpoints admin avec Spring Security",
   "type": "java",
   "branche": "exercice/autorisation",
-  "classes": ["com.nocturne.lanterne.manoir.AutorisationManoirTest"],
+  "classes": [
+    "com.nocturne.lanterne.manoir.AutorisationManoirTest"
+  ],
   "minimumTests": 7
 }

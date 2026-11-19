@@ -42,6 +42,8 @@ for classe in $(jq -r '.classes[]' "$manifest"); do
   total=$((total + tests))
 done
 
+python3 "$manoir/scripts/bilan.py" "$manifest" --java target/surefire-reports/TEST-*.xml || true
+
 if [ "$total" -lt "$minimum" ]; then
   echo "::error::Seulement $total tests du manoir ont tourné (au moins $minimum attendus)."
   exit 1

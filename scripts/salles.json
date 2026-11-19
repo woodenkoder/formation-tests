@@ -1,0 +1,58 @@
+{
+  "m00": {
+    "salle": "Le Hall d'entrée",
+    "monstre": "Le Copieur"
+  },
+  "m01": {
+    "salle": "La Crypte des branches",
+    "monstre": "Le Fantôme du merge"
+  },
+  "m02": {
+    "salle": "La Bibliothèque maudite",
+    "monstre": "Le Spaghetti"
+  },
+  "m03": {
+    "salle": "La Salle des machines",
+    "monstre": "Le Golem du controller"
+  },
+  "m04": {
+    "salle": "La Cave",
+    "monstre": "Le Vampire N+1"
+  },
+  "m05": {
+    "salle": "Le Standard",
+    "monstre": "La Banshee 500"
+  },
+  "m06": {
+    "salle": "Le Laboratoire",
+    "monstre": "Le Mimic"
+  },
+  "m07": {
+    "salle": "Les Oubliettes",
+    "monstre": "Le Voleur de clés"
+  },
+  "m08": {
+    "salle": "Le Port des conteneurs",
+    "monstre": "Le Kraken du pipeline"
+  },
+  "m09": {
+    "salle": "La Tour de garde",
+    "monstre": "L'Hydre"
+  },
+  "m10": {
+    "salle": "L'Atelier des automates",
+    "monstre": "L'Automate qui hallucine"
+  },
+  "m11": {
+    "salle": "La Chambre de l'Oracle",
+    "monstre": "L'Oracle menteur"
+  },
+  "m12": {
+    "salle": "Le Grenier",
+    "monstre": "Le Fantôme de l'imposteur"
+  },
+  "m13": {
+    "salle": "Le Toit",
+    "monstre": "Le Spectre de la mise en prod"
+  }
+}

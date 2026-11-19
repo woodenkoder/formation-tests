@@ -1,4 +1,5 @@
 {
+  "numero": "10.1",
   "titre": "Un fichier d'instructions pour agent dans ton dépôt",
   "type": "ci",
   "branche": "exercice/agents"

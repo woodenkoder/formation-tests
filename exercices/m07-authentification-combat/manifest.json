@@ -1,0 +1,7 @@
+{
+  "titre": "Hacher avec bcrypt et émettre un JWT",
+  "type": "java",
+  "branche": "exercice/auth",
+  "classes": ["com.nocturne.lanterne.manoir.AuthManoirTest"],
+  "minimumTests": 7
+}

@@ -1,0 +1,7 @@
+{
+  "titre": "Sortir les secrets du code et régler CORS",
+  "type": "java",
+  "branche": "exercice/secrets-cors",
+  "classes": ["com.nocturne.lanterne.manoir.SecretsCorsManoirTest"],
+  "minimumTests": 6
+}

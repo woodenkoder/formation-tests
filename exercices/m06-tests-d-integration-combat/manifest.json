@@ -1,0 +1,11 @@
+{
+  "titre": "Un test d'intégration avec un vrai PostgreSQL",
+  "type": "java",
+  "branche": "exercice/integration",
+  "classes": [
+    "com.nocturne.lanterne.manoir.IntegrationManoirTest",
+    "com.nocturne.lanterne.manoir.PostgresManoirTest",
+    "com.nocturne.lanterne.commande.CommandeRepositoryIT"
+  ],
+  "minimumTests": 9
+}

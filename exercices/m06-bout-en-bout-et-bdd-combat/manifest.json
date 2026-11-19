@@ -1,0 +1,7 @@
+{
+  "titre": "Un scénario Cucumber du parcours d'achat",
+  "type": "java",
+  "branche": "exercice/bdd",
+  "classes": ["com.nocturne.lanterne.manoir.BddManoirTest"],
+  "minimumTests": 3
+}

@@ -1,0 +1,10 @@
+{
+  "titre": "Les tests unitaires d'un service avec un mock",
+  "type": "java",
+  "branche": "exercice/mockito",
+  "classes": [
+    "com.nocturne.lanterne.manoir.MockitoManoirTest",
+    "com.nocturne.lanterne.commande.CommandeServiceTest"
+  ],
+  "minimumTests": 6
+}

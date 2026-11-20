@@ -34,6 +34,7 @@ jobs:
       contents: read
     outputs:
       exercice: ${{ steps.exercice.outputs.id }}
+      bilan: ${{ steps.bilan.outputs.json }}
     steps:
       - name: Les tests du manoir
         uses: actions/checkout@v4
@@ -64,6 +65,7 @@ jobs:
       - name: Tests cachés
         env:
           EXERCICE: ${{ steps.exercice.outputs.id }}
+          MANOIR_BILAN: ${{ runner.temp }}/bilan.json
         run: |
           type=$(jq -r '.type' "manoir/exercices/$EXERCICE/manifest.json")
           case "$type" in
@@ -71,6 +73,19 @@ jobs:
             docker | ci) bash manoir/scripts/script.sh "$EXERCICE" ;;
             *) echo "::error::Type d'épreuve pas encore corrigé : $type"; exit 1 ;;
           esac
+
+      # Le bilan (coups portés, total, vérifications ratées), affiché dans le manoir. Purement informatif : la
+      # réussite vient du résultat de ce job. Une ligne de JSON, ou {} s'il n'y a pas de bilan.
+      - name: Bilan du combat
+        id: bilan
+        if: always() && steps.exercice.outputs.id != ''
+        run: |
+          fichier="$RUNNER_TEMP/bilan.json"
+          if [ -s "$fichier" ] && jq -e . "$fichier" >/dev/null 2>&1; then
+            echo "json=$(jq -c . "$fichier")" >> "$GITHUB_OUTPUT"
+          else
+            echo "json={}" >> "$GITHUB_OUTPUT"
+          fi
 
   envoi:
     name: Résultat envoyé au manoir
@@ -86,12 +101,22 @@ jobs:
           EXERCICE: ${{ needs.tests.outputs.exercice }}
           REUSSI: ${{ needs.tests.result == 'success' }}
           CODE: ${{ secrets.code }}
+          BILAN: ${{ needs.tests.outputs.bilan }}
           MANOIR: https://dlpagomkagiotcdwgpgz.supabase.co/functions/v1/github-result
         run: |
           jeton=$(curl -sS --fail -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=woodenkoder-formation" | jq -r '.value')
-          corps=$(jq -n --arg id "$EXERCICE" --argjson ok "$REUSSI" --arg code "$CODE" \
-            '{results: [{exerciseId: $id, passed: $ok}]} + (if $code == "" then {} else {linkCode: $code} end)')
+          # Le bilan n'est gardé que s'il est cohérent (sinon le manoir refuserait tout le résultat).
+          corps=$(jq -n --arg id "$EXERCICE" --argjson ok "$REUSSI" --arg code "$CODE" --arg bilan "$BILAN" '
+            (($bilan | fromjson?) // {}) as $b
+            | (if ($b | type) == "object" and ($b.total | type) == "number" and ($b.score | type) == "number"
+                 and $b.total >= 1 and $b.total <= 100 and $b.score >= 0 and $b.score <= $b.total
+                 and ($b.total | floor) == $b.total and ($b.score | floor) == $b.score
+               then {score: $b.score, total: $b.total,
+                     echecs: [($b.echecs // [])[]? | strings | .[0:120]][0:5]}
+               else {} end) as $resume
+            | {results: [{exerciseId: $id, passed: $ok} + $resume]}
+              + (if $code == "" then {} else {linkCode: $code} end)')
           reponse=$(mktemp)
           statut=$(curl -sS -o "$reponse" -w '%{http_code}' -X POST "$MANOIR" \
             -H "Authorization: Bearer $jeton" -H 'Content-Type: application/json' --data "$corps")

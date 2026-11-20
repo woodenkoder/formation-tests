@@ -89,6 +89,13 @@ def main():
         print(f"  {'✔' if ok else '✖'} {message}" + (f"\n      → {raison}" if raison else ""))
     print(verdict.replace("**", ""))
 
+    # Le bilan pour le manoir (envoyé avec le résultat) : coups portés, total, au plus 5 vérifications ratées.
+    sortie = os.environ.get("MANOIR_BILAN")
+    if sortie and total:
+        echecs = [message[:120] for ok, message, _ in resultats if not ok][:5]
+        with open(sortie, "w", encoding="utf-8") as f:
+            json.dump({"score": coups, "total": total, "echecs": echecs}, f, ensure_ascii=False)
+
     # Le résumé du run, en haut de la page.
     resume = os.environ.get("GITHUB_STEP_SUMMARY")
     if resume:

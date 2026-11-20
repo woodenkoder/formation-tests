@@ -1,0 +1,6 @@
+{
+  "numero": "02.2",
+  "titre": "Corriger les alertes du linter",
+  "type": "ci",
+  "branche": "exercice/linter"
+}

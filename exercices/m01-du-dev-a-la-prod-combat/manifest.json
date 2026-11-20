@@ -1,0 +1,7 @@
+{
+  "numero": "01.5",
+  "titre": "Un tag de version et une branche hotfix",
+  "type": "ci",
+  "branche": "hotfix/0.1.1",
+  "code": "hotfix"
+}

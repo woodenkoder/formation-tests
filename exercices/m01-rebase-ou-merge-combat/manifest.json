@@ -1,0 +1,6 @@
+{
+  "numero": "01.2",
+  "titre": "Rebaser une branche en retard",
+  "type": "ci",
+  "branche": "exercice/en-retard"
+}

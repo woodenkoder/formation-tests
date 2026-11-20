@@ -10,7 +10,8 @@ const exercices = readdirSync(racine).filter((id) => existsSync(join(racine, id,
 
 const trouve = exercices.find((id) => {
   const manifest = JSON.parse(readFileSync(join(racine, id, 'manifest.json'), 'utf8'));
-  return id === demande || manifest.branche === demande;
+  // L'identifiant, la branche de l'épreuve, ou son code court (lancé à la main : Actions → Manoir → Run workflow).
+  return id === demande || manifest.branche === demande || manifest.code === demande;
 });
 if (!trouve) {
   console.error(`::error::Aucune épreuve du manoir pour « ${demande} ». Pousse sur une branche exercice/… de ta Lanterne.`);

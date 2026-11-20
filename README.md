@@ -24,7 +24,8 @@ exercices/<identifiant de l'épreuve>/
   tests/…         les classes de test, dans leurs packages
 
 exercices/<identifiant de l'épreuve>/          (types docker et ci)
-  manifest.json   { "titre", "type": "docker" | "ci", "branche": "exercice/…" }
+  manifest.json   { "titre", "type": "docker" | "ci", "branche": "exercice/…", "code"? }
+                  (code : le nom court pour lancer le combat à la main, Actions → Manoir → Run workflow)
   verifier.sh     les vérifications (verifie, ok, ko… : scripts/outils.sh), lancées dans la Lanterne
 ```
 

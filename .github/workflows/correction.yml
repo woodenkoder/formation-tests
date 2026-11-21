@@ -32,6 +32,8 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      # Lire la description d'une pull request (combat 12.3), dans l'étape « La pull request » seulement.
+      pull-requests: read
     outputs:
       exercice: ${{ steps.exercice.outputs.id }}
       bilan: ${{ steps.bilan.outputs.json }}
@@ -58,6 +60,16 @@ jobs:
           # Tout l'historique (branches et tags) : certains combats vérifient tes branches, tes merges, tes tags.
           fetch-depth: 0
 
+      # Combat qui lit une pull request (12.3) : sa description, lue avec le jeton en lecture seule dans une étape
+      # qui n'exécute aucun code de l'élève. Les étapes suivantes ne reçoivent pas ce jeton.
+      - name: La pull request
+        if: steps.exercice.outputs.pr != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TETE: ${{ steps.exercice.outputs.pr }}
+          DEPOT: ${{ github.repository }}
+        run: gh api "repos/$DEPOT/pulls?head=${DEPOT%%/*}:$TETE&state=all&per_page=1" > "$RUNNER_TEMP/pr.json"
+
       - name: Java 21
         uses: actions/setup-java@v4
         with:
@@ -68,6 +80,7 @@ jobs:
         env:
           EXERCICE: ${{ steps.exercice.outputs.id }}
           MANOIR_BILAN: ${{ runner.temp }}/bilan.json
+          MANOIR_PR: ${{ runner.temp }}/pr.json
         run: |
           type=$(jq -r '.type' "manoir/exercices/$EXERCICE/manifest.json")
           case "$type" in

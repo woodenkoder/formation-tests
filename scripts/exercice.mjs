@@ -18,3 +18,6 @@ if (!trouve) {
   process.exit(1);
 }
 console.log(`id=${trouve}`);
+// Combat qui lit une pull request (sa description) : la branche de tête, pour l'étape « La pull request ».
+const manifeste = JSON.parse(readFileSync(join(racine, trouve, 'manifest.json'), 'utf8'));
+if (manifeste.pr === true) console.log(`pr=${manifeste.branche}`);

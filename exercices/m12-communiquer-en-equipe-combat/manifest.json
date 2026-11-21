@@ -1,0 +1,7 @@
+{
+  "numero": "12.3",
+  "titre": "Une description de PR conforme au modèle de l'équipe",
+  "type": "ci",
+  "branche": "exercice/description-pr",
+  "pr": true
+}

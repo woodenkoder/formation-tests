@@ -29,7 +29,8 @@ jobs:
   tests:
     name: Tests du manoir
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Les combats du Toit construisent et lancent toute la Lanterne (jusqu'à une quinzaine de minutes).
+    timeout-minutes: 30
     permissions:
       contents: read
       # Lire la description d'une pull request (combat 12.3), dans l'étape « La pull request » seulement.

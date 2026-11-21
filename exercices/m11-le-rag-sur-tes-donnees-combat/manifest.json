@@ -1,0 +1,8 @@
+{
+  "numero": "11.2",
+  "titre": "Un assistant qui répond sur la FAQ de Nocturne",
+  "type": "java",
+  "branche": "exercice/rag",
+  "classes": ["com.nocturne.lanterne.manoir.RagManoirTest"],
+  "minimumTests": 6
+}

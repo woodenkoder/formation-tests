@@ -1,0 +1,8 @@
+{
+  "numero": "11.1",
+  "titre": "Un endpoint qui résume une commande et renvoie un JSON valide",
+  "type": "java",
+  "branche": "exercice/spring-ai",
+  "classes": ["com.nocturne.lanterne.manoir.SpringAiManoirTest"],
+  "minimumTests": 7
+}
